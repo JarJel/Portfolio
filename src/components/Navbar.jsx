@@ -67,7 +67,7 @@ export default function Navbar() {
         {/* SOCIAL MEDIA ICONS (Desktop) */}
         <div className="hidden md:flex items-center space-x-4">
           <a 
-            href="https://instagram.com" 
+            href="https://www.instagram.com/fajaaa.r/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="Instagram"
@@ -80,7 +80,7 @@ export default function Navbar() {
             </svg>
           </a>
           <a 
-            href="https://github.com" 
+            href="https://github.com/JarJel" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="GitHub"
@@ -91,7 +91,7 @@ export default function Navbar() {
             </svg>
           </a>
           <a 
-            href="https://linkedin.com" 
+            href="https://www.linkedin.com/in/muhammad-fajar-916a45305/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn"

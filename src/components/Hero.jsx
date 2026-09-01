@@ -82,18 +82,6 @@ export default function Hero() {
                 className="w-full aspect-[3/4] rounded-2xl object-cover object-[center_70%] mix-blend-normal bg-gradient-to-b from-brand-gray/80 to-brand-dark/95" 
                 loading="eager"
               />
-              
-              {/* Floating tech stack micro-badges on photo */}
-              <div className="absolute bottom-6 left-6 right-6 bg-brand-dark/80 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between">
-                <div className="text-left">
-                  <p className="text-xs text-slate-400 font-medium">Currently Building</p>
-                  <p className="text-sm text-white font-bold font-heading">BUMDESMart 2.0</p>
-                </div>
-                <div className="flex items-center space-x-1 bg-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-indigo-500/30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-ping mr-1"></span>
-                  Active
-                </div>
-              </div>
             </div>
             
           </div>
