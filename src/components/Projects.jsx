@@ -1,47 +1,55 @@
 import React from 'react';
-import { ShoppingCart, FolderKanban, MapPin, Layers, ExternalLink } from 'lucide-react';
+import { ShoppingCart, FolderKanban, MapPin, Layers, ArrowRight, Eye } from 'lucide-react';
 
 /**
  * Projects Section Component
  * Features:
  * - Clean light background layout.
  * - Interactive hover effects on project cards.
- * - Project details, tech stack badges, and dummy CTA buttons.
+ * - Project details, tech stack badges, and detail page CTA buttons.
  * - Custom icons based on the type of application.
  */
-export default function Projects() {
+export default function Projects({ onOpenDetail }) {
   const projectsList = [
     {
-      title: 'BUMDESMart',
-      description: 'Aplikasi e-commerce dan marketplace khusus untuk mengelola unit usaha Desa (BUMDes) agar dapat memasarkan produk desa secara digital. Dibuat khusus untuk keikutsertaan kompetisi tingkat regional.',
-      stack: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
-      icon: <ShoppingCart size={24} className="text-white" />,
-      iconBg: 'bg-indigo-600',
-      link: '#',
-    },
-    {
-      title: 'SIMANTAP',
-      description: 'Kontribusi pengembangan modul Kerja Praktek terintegrasi. Sistem mengelola proses pengajuan KP mahasiswa, penunjukan pembimbing, pendaftaran seminar KP, hingga penginputan nilai secara real-time.',
-      stack: ['React', 'Laravel', 'PHP', 'CSS'],
-      icon: <FolderKanban size={24} className="text-white" />,
-      iconBg: 'bg-teal-600',
-      link: '#',
-    },
-    {
+      id: 'bumdesmart-2',
       title: 'BUMDESMart 2.0',
       description: 'Pengembangan lanjutan aplikasi BUMDESMart untuk pemenuhan program hibah pengabdian masyarakat di Desa Lengkong. Berperan langsung sebagai motor penggerak digitalisasi UMKM desa setempat.',
       stack: ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
       icon: <Layers size={24} className="text-white" />,
       iconBg: 'bg-rose-600',
-      link: '#',
+      hasDetail: true,
+      badgeText: 'Gallery & Screenshot Ready',
     },
     {
+      id: 'simantap',
+      title: 'SIMANTAP',
+      description: 'Kontribusi pengembangan modul Kerja Praktek terintegrasi. Sistem mengelola proses pengajuan KP mahasiswa, penunjukan pembimbing, pendaftaran seminar KP, hingga penginputan nilai secara real-time.',
+      stack: ['React', 'Laravel', 'PHP', 'CSS'],
+      icon: <FolderKanban size={24} className="text-white" />,
+      iconBg: 'bg-teal-600',
+      hasDetail: true,
+      badgeText: 'Gallery & Screenshot Ready',
+    },
+    {
+      id: 'bumdesmart-2',
+      title: 'BUMDESMart',
+      description: 'Aplikasi e-commerce dan marketplace khusus untuk mengelola unit usaha Desa (BUMDes) agar dapat memasarkan produk desa secara digital. Dibuat khusus untuk keikutsertaan kompetisi tingkat regional.',
+      stack: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+      icon: <ShoppingCart size={24} className="text-white" />,
+      iconBg: 'bg-indigo-600',
+      hasDetail: true,
+      badgeText: 'Explore Version 2.0',
+    },
+    {
+      id: 'cari-ambulan',
       title: 'CARI AMBULAN',
       description: 'Sistem pencari layanan ambulans darurat terdekat berbasis peta interaktif, radar geolokasi, dan navigasi rute tercepat secara real-time untuk penanganan insiden darurat medis.',
       stack: ['Laravel', 'React', 'MySQL', 'Leaflet API'],
       icon: <MapPin size={24} className="text-white" />,
       iconBg: 'bg-amber-600',
-      link: '#',
+      hasDetail: false,
+      badgeText: 'Map & Geolocator System',
     }
   ];
 
@@ -58,7 +66,7 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="text-slate-600 text-sm md:text-base">
-            Beberapa karya dan kontribusi pengembangan perangkat lunak yang telah saya rancang dan kerjakan.
+            Beberapa karya dan kontribusi pengembangan perangkat lunak yang telah saya rancang dan kerjakan. Klik tombol detail untuk melihat galeri tangkapan layar & dokumentasi lengkap.
           </p>
         </div>
 
@@ -67,9 +75,19 @@ export default function Projects() {
           {projectsList.map((project, index) => (
             <div 
               key={index}
-              className="group bg-slate-50 border border-slate-200/60 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white"
+              className="group bg-slate-50 border border-slate-200/80 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white relative overflow-hidden"
             >
               <div>
+                {/* Top Badge if Detail Available */}
+                {project.hasDetail && (
+                  <div className="mb-4">
+                    <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">
+                      <Eye size={12} />
+                      <span>{project.badgeText}</span>
+                    </span>
+                  </div>
+                )}
+
                 {/* Header: Project Icon & Title */}
                 <div className="flex items-center space-x-4 mb-6">
                   <div className={`p-3.5 rounded-2xl ${project.iconBg} shadow-lg shadow-black/10 transition-transform duration-300 group-hover:scale-110`}>
@@ -100,15 +118,19 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {/* Action Link with hover styles */}
+                {/* Action Link / Button */}
                 <div className="border-t border-slate-200/60 pt-5 flex justify-end">
-                  <a 
-                    href={project.link}
-                    className="inline-flex items-center space-x-1.5 font-bold text-sm tracking-wide text-indigo-600 hover:text-indigo-800 transition-colors"
+                  <button 
+                    onClick={() => project.hasDetail && onOpenDetail(project.id)}
+                    className={`inline-flex items-center space-x-2 font-bold text-sm tracking-wide px-4 py-2 rounded-xl transition-all ${
+                      project.hasDetail 
+                        ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-600/20' 
+                        : 'text-slate-500 bg-slate-200/50 cursor-default'
+                    }`}
                   >
-                    <span>View Details</span>
-                    <ExternalLink size={16} className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                  </a>
+                    <span>{project.hasDetail ? 'Lihat Detail & Galeri' : 'Project Detail'}</span>
+                    <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
                 </div>
               </div>
 
@@ -120,3 +142,4 @@ export default function Projects() {
     </section>
   );
 }
+
